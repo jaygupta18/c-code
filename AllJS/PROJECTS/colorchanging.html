@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+    <title>JavaScript Background Color Switcher</title>
+    <style>
+        html {
+            margin: 0;
+          }
+          
+          span {
+            display: block;
+          }
+          .canvas {
+            margin: 100px auto 100px;
+            width: 80%;
+            text-align: center;
+          }
+          
+          .button {
+            width: 100px;
+            height: 100px;
+            border: solid black 2px;
+            display: inline-block;
+          }
+          
+          #grey {
+            background: rgb(229, 175, 203);
+          }
+          
+          #white {
+            background: rgb(238, 201, 155);
+          }
+          #blue {
+            background: rgb(112, 112, 224);
+          }
+          #yellow {
+            background: rgba(71, 150, 165, 0.618);
+          }
+          
+    </style>
+  </head>
+  <body>
+  
+    <div class="canvas">
+      
+      <h1> change the color </h1>
+      <span class="button" id="grey"></span>
+      <span class="button" id="white"></span>
+      <span class="button" id="blue"></span>
+      <span class="button" id="yellow"></span>
+      <h2>
+        
+        <span> try to change the color of this background </span>
+      </h2>
+    </div>
+    <script>
+        const buttons=document.querySelectorAll('.button')
+        const body=document.querySelector('body');
+        buttons.forEach(function (button){
+            console.log(button);
+            button.addEventListener('click',function(e){
+                console.log(e)
+                console.log(e.target)
+                if(e.target.id=='grey'){
+                    body.style.backgroundColor='rgb(229, 175, 203)'
+                }
+                if(e.target.id=='white'){
+                    body.style.backgroundColor='rgb(238, 201, 155)'
+                }
+                if(e.target.id=='blue'){
+                    body.style.backgroundColor='rgb(112, 112, 224)'
+                }
+                if(e.target.id=='yellow'){
+                    body.style.backgroundColor='rgba(71, 150, 165, 0.618)'
+                }
+
+            })
+        })
+
+    </script>
+  </body>
+</html>

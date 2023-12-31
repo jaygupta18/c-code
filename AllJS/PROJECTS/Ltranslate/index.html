@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Translator App</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px;
+            min-height: 100vh;
+            background-color: rgb(23, 18, 22);
+        }
+        .container{
+            max-width: 700px;
+            width: 100%;
+            padding: 30px;
+            background-color: rgb(136, 225, 179);
+
+            
+    
+            border-radius: 20px;
+
+        }
+        .wrapper{
+            border-radius: 10px;
+         
+            
+
+        }
+        .wrapper .textinput{
+            display: flex;
+          
+        }
+        .formtext{
+            background-color: rgb(211, 241, 231);
+        }
+        .textinput textarea{
+            height: 250px;
+            width: 100%;
+            outline: none;
+            resize: none;
+       
+            font-size: 14px;
+            padding:10px 15px;
+            border-radius: 5px;
+        }
+        .textinput textarea::placeholder{
+            color: rgba(5, 5, 5, 0.377);
+        }
+        .textinput{
+           gap: 10px;
+        }
+.controls,li,.icons,.icons i{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.controls{
+    list-style: none;
+    padding: 10px 15px;
+}
+.controls .rowform .icons i{
+    width: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  justify-content: center;
+  padding: 15px;
+}
+.textinput textarea::-webkit-scrollbar{
+    width: 4px;
+}
+
+.controls .rowto .icons i{
+    width: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  justify-content: center;
+  padding: 15px;
+}
+
+.controls i:active{
+    transform: scale(0.9);
+}
+ .exchange{
+    cursor: pointer;
+    font-size:20px;
+    transition: transform 0.2s ease;
+  
+}
+.container button{
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid rgba(26, 24, 24, 0.887);
+    width: 100%;
+    height: 25px;
+    color: rgb(252, 251, 252);
+    font-size: 20px;
+    background-color: rgb(30, 7, 67);
+    padding: -2px 0px;
+    cursor: pointer;
+}
+.container button:active{
+    transform: scale(0.99);
+}
+.logo{
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    color: rgb(138, 2, 95);
+    font-weight: bolder;
+    text-shadow: 0px 10px 20px 10px rgb(117, 173, 48);
+    font-size: 17px;
+   
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            Translate Your Sentence 
+        </div>
+        <div class="wrapper">
+           <div class="textinput">
+            <textarea class="formtext" placeholder="Enter Text"></textarea>
+            <textarea class="formto" placeholder="Translation" readonly disabled></textarea>
+           </div> 
+           <ul class="controls">
+            <li class="rowform">
+                <div class="icons">
+                    <i id="from"class="fas fa-volume-up"></i>
+                    <i id="from"class="fas fa-copy"></i>
+                </div>
+                <select>
+                    
+                </select>
+            </li>
+            <li class="exchange"><i class="fas fa-exchange-alt"></i></li>
+            <li class="rowto">
+                <select>
+                    
+                </select>
+                    <div class="icons">
+                        <i id="to"class="fas fa-copy"></i>
+                        <i id="to" class="fas fa-volume-up"></i>
+                    </div>
+            </li>
+           </ul>
+        </div>
+        <button>Translate Text</button>
+    </div>
+    <script src="country.js"></script>
+    <script>
+       const formtext=document.querySelector(".formtext");
+       const formto=document.querySelector(".formto")
+        const select=document.querySelectorAll("select")
+        translationbtn=document.querySelector("button")
+       exchange=document.querySelector(".exchange")
+       icons=document.querySelectorAll(".icons i")
+        select.forEach((tag,id)=>{
+            for(const countrycode in country){
+                let selected;
+                if(id==0 && countrycode=="en-GB"){
+                    selected="selected"
+                }
+                else if(id==1&&countrycode=="hi-IN"){
+                       selected="selected"
+                }
+           
+            let option=`<option value="${countrycode}" ${selected}>${country[countrycode]}</option>`;
+            tag.insertAdjacentHTML("beforeend",option);
+
+            }
+        });
+        translationbtn.addEventListener("click",()=>{
+        let text=formtext.value;
+        translatefrom=select[0].value,
+        translateto=select[1].value;
+        if(!text) return;
+        formto.setAttribute("placeholder","Translating...")
+        let apiurl=`https://api.mymemory.translated.net/get?q=${text}&langpair=${translatefrom}|${translateto}`;
+        fetch(apiurl).then(res=>res.json()).then(data=>{
+            console.log(data);
+            formto.value=data.responseData.translatedText;
+        formto.setAttribute("placeholder","Translatiobn")
+
+        });
+        });
+        exchange.addEventListener("click",()=>{
+            let temptext=formtext.value,
+            templang=select[0].value;
+            formtext.value=formto.value;
+            formto.value=temptext;
+            select[0].value=select[1].value;
+            select[1].value=templang;
+
+        })
+        
+        icons.forEach(icon=>{
+            icon.addEventListener("click",(target)=>{
+                console.log(event.target)
+                if(event.target.classList.contains("fa-copy")){
+                    if(event.target.id=="from"){
+                        navigator.clipboard.writeText(formtext.value);
+
+                    }
+                    else {
+                        navigator.clipboard.writeText(formto.value);
+                    }
+                } 
+                else{
+                    let utterance;
+                    if(event.target.id=="from"){
+                       utterance=new SpeechSynthesisUtterance(formtext.value);
+                       utterance.lang=select[0].value;
+                    }else{
+                    utterance=new SpeechSynthesisUtterance(formto.value);
+                    utterance.lang=select[1].value;
+
+                    }
+                    speechSynthesis.speak(utterance);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+

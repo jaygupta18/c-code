@@ -1,0 +1,59 @@
+{
+    "data":[
+        {
+        "id":"0injdnjndndn",
+        "infected":1310,
+        "recovered":58,
+        "latitude":41.77,
+        "longitude":14.44,
+        "name":"New Delhi",
+        "country":"IT",
+        "lastupdated":"2020-04-5 T09:07:02.03"
+
+},
+{
+    "id":"0injnjndnkdn",
+    "infected":131,
+    "recovered":58,
+    "latitude":41.77,
+    "longitude":14.44,
+    "name":"Agra",
+    "country":"IT",
+    "lastupdated":"2020-04-5 T09:07:02.03"
+
+},
+{
+    "id":"0injdnndnkdn",
+    "infected":266,
+    "recovered":58,
+    "latitude":41.77,
+    "longitude":14.44,
+    "name":"Mumbai",
+    "country":"IT",
+    "lastupdated":"2020-04-5 T09:07:02.03"
+
+},
+{
+    "id":"0injdnjndnkn",
+    "infected":203,
+    "recovered":58,
+    "latitude":41.77,
+    "longitude":14.44,
+    "name":"Kota",
+    "country":"IT",
+    "lastupdated":"2020-04-5 T09:07:02.03"
+
+},
+{
+    "id":"0njdnjndnkdn",
+    "infected":298,
+    "recovered":58,
+    "latitude":41.77,
+    "longitude":14.44,
+    "name":"Bhopal",
+    "country":"IT",
+    "lastupdated":"2020-04-5 T09:07:02.03"
+
+}]
+     
+}

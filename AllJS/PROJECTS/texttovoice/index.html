@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text to voice converter</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+        }
+        .hero{
+            width: 100vw;
+            height:100vh;
+            background: linear-gradient(40deg,rgb(8, 7, 8), rgb(8, 4, 13));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: rgba(255, 255, 255, 0.858);
+        }
+        .hero h1{
+            font-size: 28px;
+            font-weight: bolder;
+            margin-bottom: 50px;
+            margin-top: -50px;
+
+        }
+        .hero h1 span {
+            color: rgb(206, 201, 61);
+            text-decoration: underline;
+        }
+        textarea{
+         
+        min-height:200px ;
+        width: 400px;
+            background: rgba(57, 149, 70, 0.563);
+           color: aliceblue;
+           font-size: 15px;
+           border: 0px;
+           border-radius: 10px;
+           margin-bottom: 30px;
+           overflow: hidden;
+           border: 0;
+            outline: 0;
+            cursor: pointer;
+           
+        }
+        textarea::placeholder{
+            
+            padding: 10px !important;
+            font-size: 16px;
+            align-items: center;
+            text-align: center; 
+            justify-content: center;
+            color: aliceblue;
+            margin: 5px;
+               
+        }
+        .row{
+            position: relative;
+            width: 500px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        button{
+            background-color: rgb(203, 24, 222);
+            font-weight: bolder;
+            align-items: center;
+            text-align: center;
+            padding-left: 6px;
+            font-size: 20px;
+            width: 140px;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            border: 0;
+            gap: 3px;
+            
+        }
+        button img{
+            width: 10px;
+           
+        }
+        select{
+            background-color: rgb(94, 68, 167);
+            height: 30px;
+            width: 500px;
+            border: 0;
+padding: 1px 10px;
+            outline: 0;
+            border-radius: 20px;
+            border: 2px solid rgb(114, 29, 120) ;
+           appearance: none;
+           background-image: url(dropdown.png);
+           background-repeat: no-repeat;
+           background-size: 15px;
+           background-position-x:calc(350px) ;
+           background-position-y:8px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="hero">
+       <h1>Text To Speech <span>Converter</span> </h1>
+       <textarea placeholder="Write anything here..."></textarea>
+       <div class="row">
+        <select ></select>
+        <button> <img src="play.png" alt="">Listen</button>
+       </div>
+    </div>
+    <script>
+        let speech=new SpeechSynthesisUtterance();
+        let voice=[];
+        let voiceselect=document.querySelector("select");
+        window.speechSynthesis.onvoiceschanged=()=>{
+            let voices=window.speechSynthesis.getVoices();
+            speech.voice=voices[0];
+            voices.forEach((voice,i)=>(voiceselect.options[i]=new Option(voice.name,i)))
+        };
+        voiceselect.addEventListener("change",()=>{
+            speech.voice =voices[voiceselect.value]
+        });
+        document.querySelector("button").addEventListener("click",()=>{
+            speech.text=document.querySelector("textarea").value;
+            window.speechSynthesis.speak(speech)
+        })
+    </script>
+</body>
+</html>

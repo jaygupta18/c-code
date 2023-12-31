@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM t</title>
+</head>
+<body style="background-color:black; color:aliceblue">
+    <ul class="language">
+        <li>javascript</li>
+    </ul>
+
+    
+</body>
+<script>
+    
+    function addlan(langname){ 
+        const li=document.createElement('li');
+        li.innerHTML=`${langname}`
+        document.querySelector('.language').appendChild(li)
+    } 
+    
+    addlan("python")
+    addlan("java")
+    
+    function addoplan(langname){
+        const li=document.createElement('li');
+        li.appendChild(document.createTextNode(langname))
+        document.querySelector('.language').appendChild(li)
+
+    }
+
+    addoplan("heloo")
+    //Edit the li
+    const secondlan=document.querySelector("li:nth-child(2)")
+    secondlan.innerHTML="mojo"
+    console.log(secondlan)
+
+    //another method
+    const newli=document.createElement("li");
+    newli.textContent="jay"
+    secondlan.replaceWith(newli)
+    
+    //remove 
+    const lastlang=document.querySelector('li:nth-child(3)')
+    lastlang.remove()
+</script>
+</html>
